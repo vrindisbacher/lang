@@ -22,17 +22,17 @@ DEPEND += lexer.ml parser.ml
 
 # When "make" is invoked with no arguments, we build an executable 
 # typechecker, after building everything that it depends on
-all: $(DEPEND) $(OBJS) f
+all: $(DEPEND) $(OBJS) vlang
 
 # On a Windows machine, we do exactly the same except that the executable
 # file that gets built needs to have the extension ".exe"
-windows: $(DEPEND) $(OBJS) f.exe
+windows: $(DEPEND) $(OBJS) vlang.exe
 
 # Include an automatically generated list of dependencies between source files
 include .depend
 
 # Build an executable typechecker
-f: $(OBJS) main.cmo 
+vlang: $(OBJS) main.cmo 
 	@echo Linking $@
 	ocamlc -o $@ $(COMMONOBJS) $(OBJS) 
 
@@ -42,8 +42,8 @@ f.exe: $(OBJS) main.cmo
 	ocamlc -o $@ $(COMMONOBJS) $(OBJS) 
 
 # Build and test
-test: all
-	./f test.f
+# test: all
+# 	./vlang test.vl
 
 # Compile an ML module interface
 %.cmi : %.mli
@@ -68,7 +68,7 @@ parser.ml parser.mli: parser.mly
 # Clean up the directory
 clean::
 	rm -rf lexer.ml parser.ml parser.mli *.o *.cmo *.cmi parser.output \
-	   f f.exe TAGS *~ *.bak
+	   vlang vlang.exe TAGS *~ *.bak
 
 # Rebuild intermodule dependencies
 depend:: $(DEPEND) 
