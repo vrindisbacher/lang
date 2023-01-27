@@ -1,6 +1,6 @@
 *.cmi 
 *.cmo
-f
+vlang
 *.mli
 *.output
 parser.ml 
